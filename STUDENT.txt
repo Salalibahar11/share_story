@@ -1,2 +1,2 @@
-APP_URL=<url_aplikasi>
-MAP_SERVICE_API_KEY=<api_key>
+APP_URL= https://salalibahar11.github.io/share_story/
+MAP_SERVICE_API_KEY=<api_key>   

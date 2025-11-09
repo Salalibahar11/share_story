@@ -8,8 +8,7 @@ module.exports = {
   },
   output: {
     filename: (pathData) => {
-      // Jika nama entry-nya 'sw', buat filenya 'sw.bundle.js'
-      // Jika tidak, gunakan format [name].bundle.js
+
       return pathData.chunk.name === 'sw' ? 'sw.bundle.js' : '[name].bundle.js';
     },
     path: path.resolve(__dirname, 'dist'),

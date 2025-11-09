@@ -26,10 +26,9 @@ module.exports = merge(common, {
       },
     },
 
-    // ✅ FIX: Konfigurasi proxy diubah menjadi ARRAY untuk v5
     proxy: [
       {
-        context: ['/v1'], // Path yang akan di-proxy
+        context: ['/v1'], 
         target: 'https://story-api.dicoding.dev',
         changeOrigin: true,
         secure: false,

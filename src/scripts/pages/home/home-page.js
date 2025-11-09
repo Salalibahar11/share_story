@@ -1,4 +1,3 @@
-/* eslint-disable no-new */
 import L from 'leaflet';
 import { getAllStories } from '../../data/api';
 import IdbHelper from '../../data/idb-helper';
@@ -41,7 +40,7 @@ export default class HomePage {
   }
   
   async afterRender() {
-    // MEMPERBAIKI IKON LEAFLET
+
     delete L.Icon.Default.prototype._getIconUrl;
     L.Icon.Default.mergeOptions({
       iconUrl: 'images/marker-icon.png',
@@ -79,7 +78,7 @@ export default class HomePage {
   }
 
   async _loadAndDisplayStories() {
-    // Elemen dicari satu kali di sini
+
     const tableBody = document.getElementById('story-table-body');
     const placeholder = document.getElementById('story-list-placeholder');
 
@@ -92,17 +91,15 @@ export default class HomePage {
 
     let stories = [];
     try {
-      // 1. Coba ambil dari API
       console.log('Fetching stories from API...');
       stories = await getAllStories();
       
-      // 2. Jika berhasil, simpan ke IndexedDB
       await IdbHelper.clearAllStories();
       stories.forEach(story => IdbHelper.putStory(story));
       
       console.log('Stories fetched from API and saved to IDB.');
     } catch (error) {
-      // 3. Jika gagal (offline), ambil dari IndexedDB
+
       console.error(`Gagal memuat dari API: ${error.message}. Mengambil dari IDB...`);
       placeholder.innerHTML = `Gagal memuat dari API. Menampilkan data offline...`;
       stories = await IdbHelper.getAllStories();
@@ -112,13 +109,12 @@ export default class HomePage {
       }
     }
 
-    // Elemen diteruskan sebagai parameter
     this._renderStoriesToTable(stories, tableBody, placeholder);
   }
 
-  // Elemen diterima sebagai parameter
+
   _renderStoriesToTable(stories, tableBody, placeholder) {
-    tableBody.innerHTML = ''; // Sekarang ini aman
+    tableBody.innerHTML = ''; 
     if (stories.length === 0) {
       placeholder.innerHTML = 'Belum ada cerita yang ditambahkan.';
       placeholder.style.display = 'block';

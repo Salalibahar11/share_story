@@ -38,7 +38,7 @@ export default class AddStoryPage {
   }
 
   _initMap() {
-    // ✅ TAMBAHKAN BLOK KODE INI UNTUK MEMPERBAIKI IKON
+
     delete L.Icon.Default.prototype._getIconUrl;
     L.Icon.Default.mergeOptions({
       iconUrl: 'images/marker-icon.png',
@@ -113,18 +113,18 @@ export default class AddStoryPage {
           window.location.hash = '#/';
         }, 1500);
       } catch (error) {
-        // ✅ KRITERIA 4 ADVANCED: OFFLINE SYNC
+
         statusElement.textContent = `Gagal mengunggah: ${error.message}`;
         statusElement.style.color = 'var(--error-color)';
         
-        // Asumsi gagal karena offline
+
         if (navigator.onLine === false || error.message.includes('Failed to fetch')) {
           try {
             await IdbHelper.putPendingStory(formData);
             statusElement.textContent = 'Gagal mengunggah. Cerita disimpan dan akan di-sync saat online.';
             statusElement.style.color = 'var(--secondary-color)';
 
-            // Daftarkan background sync
+
             if ('serviceWorker' in navigator && 'SyncManager' in window) {
               navigator.serviceWorker.ready.then(registration => {
                 registration.sync.register('sync-pending-stories');

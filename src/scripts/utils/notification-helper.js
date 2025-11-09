@@ -1,4 +1,4 @@
-    // Fungsi ini mengubah VAPID key (string) menjadi Uint8Array
+
 function urlBase64ToUint8Array(base64String) {
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
   const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
@@ -36,8 +36,7 @@ const NOTIFICATION_HELPER = {
       let subscription = await registration.pushManager.getSubscription();
 
       if (!subscription) {
-        // GANTI DENGAN VAPID PUBLIC KEY ANDA
-        // Anda bisa generate VAPID keys dengan: npx web-push generate-vapid-keys
+
         const vapidPublicKey = 'BFGGBvReOIFPdiB70ffPQ2mUFzp1L7FVR3te2mYjg0su65xqHd_YpLBLQtQanF506Vi2zfpgKmlTVp-lGEgK0cg';
         
         subscription = await registration.pushManager.subscribe({
@@ -47,8 +46,7 @@ const NOTIFICATION_HELPER = {
       }
 
       console.log('Push Subscription:', subscription.toJSON());
-      // Di sini Anda bisa mengirim subscription ke server (POST /notifications/subscribe)
-      // Tapi untuk kriteria, yang penting adalah subscribe dan bisa di-test
+
       alert('Berhasil subscribe push notification!');
     } catch (error) {
       console.error('Failed to subscribe to push notifications:', error);
