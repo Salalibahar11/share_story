@@ -1,13 +1,15 @@
+//
+const path = require('path'); // ✅ INI ADALAH PERBAIKANNYA
 const common = require('./webpack.common.js');
 const { merge } = require('webpack-merge');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { InjectManifest } = require('workbox-webpack-plugin');
+const { InjectManifest } = require('workbox-webpack-plugin'); // Plugin untuk PWA
 
 module.exports = merge(common, {
   mode: 'production',
-  output: { 
-    publicPath: '/share_story/', 
+  output: {
+    publicPath: '/share_story/', // Untuk GitHub Pages
   },
   module: {
     rules: [
@@ -15,7 +17,7 @@ module.exports = merge(common, {
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',   
+          'css-loader',
         ],
       },
       {
@@ -35,7 +37,7 @@ module.exports = merge(common, {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
-
+    // Plugin untuk PWA (yang membutuhkan 'path')
     new InjectManifest({
       swSrc: path.resolve(__dirname, 'src/scripts/sw.js'),
       swDest: 'sw.bundle.js',
