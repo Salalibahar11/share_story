@@ -5,15 +5,21 @@ import CONFIG from '../config';
 const DB_NAME = 'story-app-db';
 const STORIES_STORE = 'stories';
 const PENDING_STORE = 'pending-stories';
-const TOKEN_STORE = 'auth-token'; // ✅ Tambahkan store baru
+const TOKEN_STORE = 'auth-token';
 
-const dbPromise = openDB(DB_NAME, 1, {
-  upgrade(db) {
-    db.createObjectStore(STORIES_STORE, { keyPath: 'id' });
-    db.createObjectStore(PENDING_STORE, { autoIncrement: true, keyPath: 'id' });
+// ✅ NAIKKAN NOMOR VERSI INI DARI 1 MENJADI 2
+const dbPromise = openDB(DB_NAME, 2, {
+  upgrade(db, oldVersion) {
+    // Hapus store lama jika ada (untuk membersihkan)
+    if (oldVersion < 1) {
+      db.createObjectStore(STORIES_STORE, { keyPath: 'id' });
+      db.createObjectStore(PENDING_STORE, { autoIncrement: true, keyPath: 'id' });
+    }
     
-    // ✅ Buat Object Store untuk Token
-    db.createObjectStore(TOKEN_STORE, { keyPath: 'id' });
+    // ✅ Tambahkan store baru di versi 2
+    if (oldVersion < 2) {
+      db.createObjectStore(TOKEN_STORE, { keyPath: 'id' });
+    }
   },
 });
 
@@ -33,7 +39,6 @@ const IdbHelper = {
 
   // --- Kriteria 4 Advanced: Simpan data pending sync ---
   async putPendingStory(storyData) {
-    // Kita tidak bisa menyimpan FormData, jadi simpan sebagai object
     const storyObject = {
       photo: storyData.get('photo'),
       description: storyData.get('description'),
@@ -51,9 +56,8 @@ const IdbHelper = {
     return (await dbPromise).delete(PENDING_STORE, id);
   },
 
-  // ✅ TAMBAHKAN DUA FUNGSI INI UNTUK TOKEN
+  // --- Fungsi untuk Token ---
   async putToken(token) {
-    // Kita simpan token dengan id 'authToken'
     return (await dbPromise).put(TOKEN_STORE, { id: 'authToken', token });
   },
 
