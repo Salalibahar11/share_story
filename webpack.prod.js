@@ -6,6 +6,9 @@ const { InjectManifest } = require('workbox-webpack-plugin');
 
 module.exports = merge(common, {
   mode: 'production',
+  output: { 
+    publicPath: '/share_story/', 
+  },
   module: {
     rules: [
       {
