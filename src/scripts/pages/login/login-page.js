@@ -1,4 +1,5 @@
 import { login } from '../../data/api';
+import IdbHelper from '../../data/idb-helper';
 
 export default class LoginPage {
   async render() {
