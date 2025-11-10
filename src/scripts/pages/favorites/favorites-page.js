@@ -1,5 +1,5 @@
 // src/scripts/pages/favorites/favorites-page.js
-import IdbHelper from '../data/idb-helper';
+import IdbHelper from 'C:\kuliah\asah dicoding\latihan\share_story\src\scripts\data\idb-helper.js';
 
 export default class FavoritesPage {
   async render() {
