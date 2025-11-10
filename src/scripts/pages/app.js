@@ -1,6 +1,6 @@
 import routes from '../routes/routes';
 import { getActiveRoute } from '../routes/url-parser';
-import NOTIFICATION_HELPER from '../utils/notification-helper';
+import IdbHelper from '../data/idb-helper';
 
 class App {
   #content = null;
@@ -21,18 +21,19 @@ class App {
     const token = localStorage.getItem('authToken');
 
     if (token) {
-
       loginLogoutLink.textContent = 'Logout';
       loginLogoutLink.href = '#/'; 
-      loginLogoutLink.addEventListener('click', (event) => {
+      
+      loginLogoutLink.addEventListener('click', async (event) => {
         event.preventDefault();
         localStorage.removeItem('authToken');
-        IdbHelper.deleteToken(); 
+        
+        await IdbHelper.deleteToken(); 
+        
         alert('Anda telah logout.');
         window.location.reload(); 
       }, { once: true }); 
     } else {
-
       loginLogoutLink.textContent = 'Login';
       loginLogoutLink.href = '#/login';
     }
@@ -55,10 +56,9 @@ class App {
     const url = getActiveRoute();
     const token = localStorage.getItem('authToken');
     
-
     const publicRoutes = ['/login', '/register'];
     const isPublicRoute = publicRoutes.includes(url);
-
+    
     if (!token && !isPublicRoute) {
       console.log('Token not found, redirecting to login.');
       window.location.hash = '#/login';
@@ -73,14 +73,11 @@ class App {
     if (token && isPublicRoute) {
       console.log('Token found, redirecting to home.');
       window.location.hash = '#/';
-
       return; 
     }
 
-
     const page = routes[url];
     if (!page) {
-
       console.log(`Page not found for route: ${url}`);
       window.location.hash = '#/'; 
       return;
