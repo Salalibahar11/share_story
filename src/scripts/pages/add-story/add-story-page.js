@@ -20,8 +20,7 @@ export default class AddStoryPage {
           </div>
             <div class="form-group">
             <label for="add-map">Lokasi (klik pada peta)</label>
-            <div id="add-map"></div>
-            <input type="hidden" id="lat" name="lat" required>
+            <div id="add-map"></div> <input type="hidden" id="lat" name="lat">
             <input type="hidden" id="lon" name="lon" required>
             <span id="locationError" class="error-message"></span>
           </div>

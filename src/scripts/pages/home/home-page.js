@@ -114,7 +114,7 @@ export default class HomePage {
 
 
   _renderStoriesToTable(stories, tableBody, placeholder) {
-    tableBody.innerHTML = ''; 
+    tableBody.innerHTML = '';
     if (stories.length === 0) {
       placeholder.innerHTML = 'Belum ada cerita yang ditambahkan.';
       placeholder.style.display = 'block';
@@ -142,6 +142,15 @@ export default class HomePage {
           marker.openPopup();
         });
       }
+
+      const favoriteButton = row.querySelector('.btn-favorite');
+      favoriteButton.addEventListener('click', async (e) => {
+        e.stopPropagation(); // Hentikan klik peta
+        e.target.innerText = 'Disimpan';
+        e.target.disabled = true;
+        await IdbHelper.addFavorite(story);
+        alert('Cerita disimpan ke Favorit!');
+      });
     });
+    };
   }
-}

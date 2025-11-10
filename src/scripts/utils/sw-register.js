@@ -6,9 +6,9 @@ const swRegister = async () => {
     return;
   }
 
-  const wb = new Workbox('/sw.bundle.js');
+  const wb = new Workbox('C:\kuliah\asah dicoding\latihan\share_story\src\scripts\sw.js');
 
-  try {
+  try {   
     await wb.register();
     console.log('Service worker registered');
   } catch (error) {
