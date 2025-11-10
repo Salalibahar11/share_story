@@ -1,3 +1,4 @@
+//
 import { login } from '../../data/api';
 import IdbHelper from '../../data/idb-helper';
 
@@ -21,7 +22,7 @@ export default class LoginPage {
         <p class="auth-link">Belum punya akun? <a href="#/register">Daftar di sini</a>.</p>
       </div>
     `;
-  } 
+  }
 
   async afterRender() {
     const form = document.getElementById('loginForm');
@@ -35,11 +36,15 @@ export default class LoginPage {
 
       try {
         const response = await login({ email, password });
+
         localStorage.setItem('authToken', response.loginResult.token);
-        await IdbHelper.putToken(response.loginResult.token);
+        
+        await IdbHelper.putToken(response.loginResult.token); 
+
         alert('Login berhasil!');
+        
         window.location.hash = '#/';
-        window.location.reload();
+        
       } catch (error) {
         statusElement.textContent = `Login gagal: ${error.message}`;
         statusElement.style.color = 'var(--error-color)';

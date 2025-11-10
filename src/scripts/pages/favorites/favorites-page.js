@@ -1,4 +1,3 @@
-// src/scripts/pages/favorites/favorites-page.js
 import IdbHelper from '../../data/idb-helper';
 
 export default class FavoritesPage {
@@ -54,12 +53,11 @@ export default class FavoritesPage {
         <td><button class="button-secondary btn-delete" data-id="${story.id}">Hapus</button></td>
       `;
 
-      // Tambahkan listener untuk Hapus (Delete)
       row.querySelector('.btn-delete').addEventListener('click', async (e) => {
         const storyId = e.target.dataset.id;
         await IdbHelper.deleteFavorite(storyId);
         alert('Favorit dihapus.');
-        await this._loadAndDisplayFavorites(); // Render ulang
+        await this._loadAndDisplayFavorites(); 
       });
     });
   }

@@ -17,7 +17,6 @@
       if (oldVersion < 2) {
         db.createObjectStore(TOKEN_STORE, { keyPath: 'id' });
       }
-      // ✅ Buat store baru di versi 3
       if (oldVersion < 3) {
         db.createObjectStore(FAVORITES_STORE, { keyPath: 'id' });
       }

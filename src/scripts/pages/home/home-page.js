@@ -1,4 +1,3 @@
-/* eslint-disable no-new */
 import L from 'leaflet';
 import { getAllStories } from '../../data/api';
 import IdbHelper from '../../data/idb-helper';
@@ -39,7 +38,6 @@ export default class HomePage {
   }
   
   async afterRender() {
-    // ... (kode setup map Anda sudah benar, biarkan saja)
     delete L.Icon.Default.prototype._getIconUrl;
     L.Icon.Default.mergeOptions({
       iconUrl: 'images/marker-icon.png',
@@ -62,7 +60,6 @@ export default class HomePage {
   }
 
   _initNotificationButton() {
-    // ... (kode ini sudah benar, biarkan saja)
     const notificationButton = document.getElementById('notification-toggle');
     if (notificationButton) {
       notificationButton.addEventListener('click', (event) => {
@@ -73,7 +70,6 @@ export default class HomePage {
   }
 
   async _loadAndDisplayStories() {
-    // ... (kode ini sudah benar, biarkan saja)
     const tableBody = document.getElementById('story-table-body');
     const placeholder = document.getElementById('story-list-placeholder');
     if (!tableBody || !placeholder) {
@@ -100,7 +96,6 @@ export default class HomePage {
   }
 
   _renderStoriesToTable(stories, tableBody, placeholder) {
-    // ... (kode ini sudah benar, biarkan saja)
     tableBody.innerHTML = '';
     if (stories.length === 0) {
       placeholder.innerHTML = 'Belum ada cerita yang ditambahkan.';
@@ -121,7 +116,6 @@ export default class HomePage {
       `;
 
       if (story.lat && story.lon) {
-        // ... (kode marker Anda sudah benar, biarkan saja)
         const marker = L.marker([story.lat, story.lon]).addTo(this.map)
           .bindPopup(`<b>${story.name}</b><br>${story.description}`);
         row.addEventListener('click', () => {
@@ -130,14 +124,12 @@ export default class HomePage {
         });
       }
 
-      // ✅ 3. TAMBAHKAN EVENT LISTENER UNTUK TOMBOL BARU
       const favoriteButton = row.querySelector('.btn-favorite');
       favoriteButton.addEventListener('click', async (e) => {
-        e.stopPropagation(); // Mencegah baris ikut ter-klik
+        e.stopPropagation(); 
         e.target.innerText = 'Disimpan';
         e.target.disabled = true;
         
-        // Simpan data cerita lengkap ke IndexedDB
         await IdbHelper.addFavorite(story); 
         alert('Cerita berhasil disimpan ke Favorit!');
       });
