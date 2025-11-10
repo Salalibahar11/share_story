@@ -38,10 +38,12 @@ export default class FavoritesPage {
     
     if (stories.length === 0) {
       placeholder.innerHTML = 'Belum ada cerita favorit yang disimpan.';
+      placeholder.style.display = 'block'; 
+      tableBody.innerHTML = ''; 
       return;
     }
     
-    placeholder.style.display = 'none';
+    placeholder.style.display = 'none'; 
     tableBody.innerHTML = '';
 
     stories.forEach(story => {
@@ -55,8 +57,11 @@ export default class FavoritesPage {
 
       row.querySelector('.btn-delete').addEventListener('click', async (e) => {
         const storyId = e.target.dataset.id;
+        
         await IdbHelper.deleteFavorite(storyId);
+        
         alert('Favorit dihapus.');
+        
         await this._loadAndDisplayFavorites(); 
       });
     });
