@@ -1,4 +1,3 @@
-//
 import { login } from '../../data/api';
 import IdbHelper from '../../data/idb-helper';
 
@@ -14,7 +13,7 @@ export default class LoginPage {
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="password" required>
           </div>
           <button type="submit">Login</button>
           <p id="login-status" style="text-align: center;"></p>
@@ -36,9 +35,8 @@ export default class LoginPage {
 
       try {
         const response = await login({ email, password });
-
-        localStorage.setItem('authToken', response.loginResult.token);
         
+        localStorage.setItem('authToken', response.loginResult.token);
         await IdbHelper.putToken(response.loginResult.token); 
 
         alert('Login berhasil!');

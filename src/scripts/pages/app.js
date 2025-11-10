@@ -24,7 +24,7 @@ class App {
       loginLogoutLink.textContent = 'Logout';
       loginLogoutLink.href = '#/'; 
       
-      loginLogoutLink.addEventListener('click', async (event) => {
+      loginLogoutLink.addEventListener('click', async (event) => { 
         event.preventDefault();
         localStorage.removeItem('authToken');
         
@@ -58,7 +58,7 @@ class App {
     
     const publicRoutes = ['/login', '/register'];
     const isPublicRoute = publicRoutes.includes(url);
-    
+
     if (!token && !isPublicRoute) {
       console.log('Token not found, redirecting to login.');
       window.location.hash = '#/login';
