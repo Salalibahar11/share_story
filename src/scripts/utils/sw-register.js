@@ -1,4 +1,4 @@
-    import { Workbox } from 'workbox-window';
+import { Workbox } from 'workbox-window';
 
 const swRegister = async () => {
   if (!('serviceWorker' in navigator)) {
@@ -6,9 +6,9 @@ const swRegister = async () => {
     return;
   }
 
-  const wb = new Workbox('C:\kuliah\asah dicoding\latihan\share_story\src\scripts\sw.js');
+  const wb = new Workbox('/share_story/sw.bundle.js');
 
-  try {   
+  try {
     await wb.register();
     console.log('Service worker registered');
   } catch (error) {
