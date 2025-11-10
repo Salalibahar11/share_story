@@ -61,6 +61,10 @@ const IdbHelper = {
     const tokenObject = await (await dbPromise).get(TOKEN_STORE, 'authToken');
     return tokenObject ? tokenObject.token : null;
   },
+
+  async deleteToken() {
+    return (await dbPromise).delete(TOKEN_STORE, 'authToken');
+  },
 };
 
 export default IdbHelper;

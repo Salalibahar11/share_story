@@ -18,8 +18,8 @@ export default class AddStoryPage {
             <textarea id="description" name="description" rows="4" required></textarea>
             <span id="descriptionError" class="error-message"></span>
           </div>
-          <div class="form-group">
-            <label>Lokasi (klik pada peta)</label>
+            <div class="form-group">
+            <label for="add-map">Lokasi (klik pada peta)</label>
             <div id="add-map"></div>
             <input type="hidden" id="lat" name="lat" required>
             <input type="hidden" id="lon" name="lon" required>

@@ -18,7 +18,7 @@ class App {
 
   _updateLoginStatus() {
     const loginLogoutLink = document.getElementById('login-logout-link');
-    const token = sessionStorage.getItem('authToken');
+    const token = localStorage.getItem('authToken');
 
     if (token) {
 
@@ -26,7 +26,8 @@ class App {
       loginLogoutLink.href = '#/'; 
       loginLogoutLink.addEventListener('click', (event) => {
         event.preventDefault();
-        sessionStorage.removeItem('authToken'); 
+        localStorage.removeItem('authToken');
+        IdbHelper.deleteToken(); 
         alert('Anda telah logout.');
         window.location.reload(); 
       }, { once: true }); 
@@ -52,7 +53,7 @@ class App {
 
   async renderPage() {
     const url = getActiveRoute();
-    const token = sessionStorage.getItem('authToken');
+    const token = localStorage.getItem('authToken');
     
 
     const publicRoutes = ['/login', '/register'];

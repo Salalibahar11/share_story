@@ -8,7 +8,7 @@ const ENDPOINTS = {
 };
 
 const getAuthToken = () => {
-  return sessionStorage.getItem('authToken');
+  return localStorage.getItem('authToken');
 };
 
 // register
