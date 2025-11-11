@@ -37,7 +37,7 @@ const NOTIFICATION_HELPER = {
 
       if (!subscription) {
 
-        const vapidPublicKey = 'BFGGBvReOIFPdiB70ffPQ2mUFzp1L7FVR3te2mYjg0su65xqHd_YpLBLQtQanF506Vi2zfpgKmlTVp-lGEgK0cg';
+        const vapidPublicKey = 'BG-vidmvs8FJWZ7b_Koj231oYylha4sT9v9UXRl3AtQTXQ2CJCAcetZAQRiKrfPjBP6B8ZIZlr75on6TEOfG7T8';
         
         subscription = await registration.pushManager.subscribe({
           userVisibleOnly: true,
